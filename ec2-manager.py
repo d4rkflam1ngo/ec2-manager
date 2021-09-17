@@ -23,7 +23,13 @@ class instance:
 
     # Print overview of the instance.
     def overview(self):
-        print ("\n")
+        print ("""
+ID: {}
+Name: {}
+State: {}
+        """.format(colored(self.id, "cyan"), (self.name if self.name != "No name assigned" else colored(self.name, "red")), colored(self.data["State"]["Name"], "red") if self.data["State"]["Name"] == "stopped" else colored(self.data["State"]["Name"], "red")))
+
+        userInput = input("> ")
 
 # Create instances array and define the boto3 client
 instances = []
@@ -41,16 +47,20 @@ for reservation in reservations:
     instances.append(instance(data))
 
 # Print the initial menu
-print(colored("""
-  ___ ___ ___   __  __                             
- | __/ __|_  ) |  \/  |__ _ _ _  __ _ __ _ ___ _ _ 
- | _| (__ / /  | |\/| / _` | ' \/ _` / _` / -_) '_|
- |___\___/___| |_|  |_\__,_|_||_\__,_\__, \___|_|  
-                                     |___/         
-""", "yellow"))
-print("Please Choose An Instance:\n")
-for x in range (len(instances)):
-    print(str(x+1) + ". " + colored(instances[x].id, "cyan") + " (" + colored(instances[x].name, "red") + ")")
+while True:
+    print(colored("""
+    ___ ___ ___   __  __                             
+    | __/ __|_  ) |  \/  |__ _ _ _  __ _ __ _ ___ _ _ 
+    | _| (__ / /  | |\/| / _` | ' \/ _` / _` / -_) '_|
+    |___\___/___| |_|  |_\__,_|_||_\__,_\__, \___|_|  
+                                        |___/         
+    """, "yellow"))
+    print("Please Choose An Instance:\n")
+    for x in range (len(instances)):
+        print(str(x+1) + ". " + colored(instances[x].id, "cyan") + " (" + (instances[x].name if instances[x].name != "No name assigned" else colored(instances[x].name, "red")) + ")")
 
-userInput = int(input("\n> "))
-instances[userInput-1].overview()
+    userInput = int(input("\n> "))
+    if userInput > 0 and userInput <= len(instances):
+        instances[userInput-1].overview()
+    else:
+        next
