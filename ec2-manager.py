@@ -23,6 +23,7 @@ class instance:
 
     # Print overview of the instance.
     def overview(self):
+        print ("\n")
 
 # Create instances array and define the boto3 client
 instances = []
@@ -51,4 +52,5 @@ print("Please Choose An Instance:\n")
 for x in range (len(instances)):
     print(str(x+1) + ". " + colored(instances[x].id, "cyan") + " (" + colored(instances[x].name, "red") + ")")
 
-userInput = input("\n> ")
+userInput = int(input("\n> "))
+instances[userInput-1].overview()
