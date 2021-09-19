@@ -1,6 +1,7 @@
 # Import required modules
 import boto3
 from termcolor import colored
+import os
 
 # Change Me
 REGION = "us-east-1"
@@ -29,7 +30,13 @@ Name: {}
 State: {}
 IP Address: {}
         """.format(colored(self.id, "cyan"), (self.name if self.name != "No name assigned" else colored(self.name, "red")), colored(self.data["State"]["Name"], "red") if self.data["State"]["Name"] == "stopped" else colored(self.data["State"]["Name"], "green"), (self.data["PublicIpAddress"] if self.data.get("PublicIpAddress") else colored("No IP Address", "red"))))
+        print("""
+Please Choose An Option:
 
+1. More Info
+2. SSH Into Instance
+3. Toggle Start/Stop Instance
+        """)
         userInput = input("> ")
 
 # Create instances array and define the boto3 client
