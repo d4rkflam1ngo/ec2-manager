@@ -2,6 +2,7 @@
 import boto3
 from termcolor import colored
 import os
+from pprint import pprint
 import subprocess
 
 # Change Me
@@ -65,7 +66,6 @@ IP Address: {}
             # Stop the instance
             client.stop_instances(InstanceIds=[self.id])
 
-
 while True:
 
     # Create instances array and define the boto3 client
@@ -115,7 +115,12 @@ Please Choose An Option:
             # Sub menu user input
             subMenuSelection = input("> ")
 
-            if subMenuSelection == "2":
+            if subMenuSelection == "1":
+
+                # Pretty print all instance data
+                pprint(instances[instanceSelection-1].data)
+
+            elif subMenuSelection == "2":
 
                 # SSH into instance
                 instances[instanceSelection-1].ssh()
@@ -135,5 +140,3 @@ Please Choose An Option:
 
     else:
         next
-
-
