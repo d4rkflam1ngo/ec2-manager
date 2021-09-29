@@ -28,7 +28,7 @@ aws_access_key_id = YOUR_ACCESS_KEY_ID
 aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 ```
 5. Change the line `REGION = "us-east-1"` to specify your own AWS region.
-6. Run the script by running:
+6. Launch the script by running:
 ```
 python3 ec2-manager.py
 ```
